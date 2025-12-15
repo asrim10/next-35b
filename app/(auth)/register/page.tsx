@@ -1,9 +1,9 @@
 import RegisterForm from "../_components/register-form";
 export default function Page() { //nap
     return (
-        <div>
+        <div className="items-center text-center">
             Register Page
-            <RegisterForm/>
+            <RegisterForm />
         </div>
     );
 }
