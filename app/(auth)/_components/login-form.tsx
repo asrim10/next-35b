@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function LoginForm() {
     return (
         <div className="mx-auto max-w-md border m-2 p-4 rounded">
@@ -10,6 +12,10 @@ export default function LoginForm() {
                 <input type="password" className="p-1 border" />
             </div>
             <button className="bg-green-500 border rounded p-2 mt-2 text-white">Login</button>
+            <div>
+                Don't have account?
+                <Link href="/register" className="text-blue-500 underline">Register</Link>
+            </div>
         </div>
     );
 }
