@@ -26,7 +26,8 @@ export default function Page() {
     }, [count]); //every time count changes, this funcions runs
     //[count, var2, ...] multiple dependencies can be watched
     
-  return (
+    return (
+      // re-render this when state changes
     <div>
           <div>Count: {count}</div>
           <button onClick={handlePlus} className="border p-2 bg-blue-500 text-white">
