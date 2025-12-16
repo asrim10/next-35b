@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, use, useState } from "react";
 import { useLoginForm } from "./hooks/use-login";
 export default function Page() {
   // const [email, setEmail] = useState("");
@@ -10,7 +10,9 @@ export default function Page() {
   //     // e- event, target -element, value- current value of input
   // }
   const { email, password, handleEmail, handlePassword, handleSubmit } =
-    useLoginForm();
+    useLoginForm(); // destructure returned object from hook
+
+  const from = useLoginForm(); //entire object
 
   return (
     <div>
@@ -18,8 +20,8 @@ export default function Page() {
         <label htmlFor="">Email</label>
         <input
           type="email"
-          value={email}
-          onChange={handleEmail}
+          value={from.email}
+          onChange={from.handleEmail}
           className="bg-amber-200 ml-5 text-black"
         />
       </div>
@@ -27,12 +29,12 @@ export default function Page() {
         <label htmlFor="">Password</label>
         <input
           type="password"
-          value={password}
-          onChange={handlePassword}
+          value={from.password}
+          onChange={from.handlePassword}
           className="ml-5 bg-amber-300 text-black"
         />
       </div>
-      <button onClick={() => alert("Email: " + email)}> Test</button>
+      <button onClick={from.handleSubmit}> Test</button>
     </div>
   );
 }

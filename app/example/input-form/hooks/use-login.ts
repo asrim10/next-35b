@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-
+//custom hook
 //hook naming convention: "use" + Functionality
 export const useLoginForm = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +15,7 @@ export const useLoginForm = () => {
       email,
       password,
     };
-    alert("Login with" + email + " " + password);
+    alert("Login with " + email + " " + password);
     //call api later
   };
 
