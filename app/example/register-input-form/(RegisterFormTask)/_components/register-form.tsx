@@ -1,6 +1,5 @@
 "use client";
 
-import { ChangeEvent, use, useState } from "react";
 import { useRegisterFrom } from "../../hooks/use-register";
 
 export default function RegisterForm() {
