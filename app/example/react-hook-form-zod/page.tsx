@@ -4,6 +4,13 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginForm, loginSchema } from "./schema";
 
+//import needed from assets under app
+import image2 from "@/app/assets/img2.jpeg";
+//to ensure that image is bundled and available at build
+import Image from "next/image";
+//auto optimized image component, nextjs recommended
+//use this instead of <img> tag
+
 // export const loginSchema = z.object({
 //   email: z.email({ message: "Email milena" }),
 //   password: z.string().min(6, { message: "Password pugena" }),
@@ -25,6 +32,10 @@ export default function Page() {
   };
   return (
     <div>
+      {/* height, width optional for asset import*/}
+      <Image src={image2} alt="image 2" />
+      {/*height weight required for punlic, omit"public" on path/src */}
+      <Image src="/images/img1.jpg" height={350} width={350} alt="image 1" />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mx-auto p-2 max-w-xl border border-cyan-400"
