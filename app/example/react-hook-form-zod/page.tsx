@@ -1,20 +1,28 @@
 "use client";
 import { useForm } from "react-hook-form";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginForm, loginSchema } from "./schema";
+
+// export const loginSchema = z.object({
+//   email: z.email({ message: "Email milena" }),
+//   password: z.string().min(6, { message: "Password pugena" }),
+// });
+
+// export type loginForm = z.infer<typeof loginSchema>;
 
 export default function Page() {
   const {
-    register, //bind input fields
-    handleSubmit, //handle form submission
+    register,
+    handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm(
-    { values: { email: "", password: "" } } // input states and initial
-  );
-
-  const onSubmit = async (data: any) => {
-    //data formdata
+  } = useForm<loginForm>({
+    resolver: zodResolver(loginSchema),
+    values: { email: "xyz", password: "abc" }, // initial
+  });
+  const onSubmit = async (data: loginForm) => {
     alert(data.email);
   };
-
   return (
     <div>
       <form
