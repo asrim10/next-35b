@@ -1,6 +1,6 @@
 // server side processing
 
-"use server";
+"use client";
 import { register } from "../api/auth";
 export const handleRegister = async (formData: any) => {
   try {
