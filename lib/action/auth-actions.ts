@@ -20,7 +20,7 @@ export const handleRegister = async (formData: any) => {
   }
 };
 
-export const handlelogin = async (formData: any) => {
+export const handleLogin = async (formData: any) => {
   try {
     //how data sent from component to backend api
     const res = await login(formData);
