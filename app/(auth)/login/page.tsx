@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { handleLogin } from "@/lib/action/auth-actions";
+import { useAuth } from "@/context/AuthContext";
 
 export const loginSchema = z.object({
   email: z.email({ message: "Email milena" }),
@@ -14,6 +15,7 @@ export const loginSchema = z.object({
 export type LoginForm = z.infer<typeof loginSchema>;
 
 export default function Page() {
+  const { checkAuth } = useAuth();
   const router = useRouter();
   const [pending, setTransition] = useTransition();
   const {
@@ -31,14 +33,15 @@ export default function Page() {
     try {
       const res = await handleLogin(data);
       if (!res.success) {
-        throw new Error(res.message || "Login Failed");
+        throw new Error(res.message || "Login failed");
       }
-      //handle redirect (optional)
+      // handle redirect (optional)
+      await checkAuth();
       setTransition(() => {
         router.push("/");
       });
     } catch (err: Error | any) {
-      setError(err.message || "Login Failed");
+      setError(err.message || "Login failed");
     }
   };
 

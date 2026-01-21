@@ -2,6 +2,7 @@
 
 "use client";
 import { login, register } from "../api/auth";
+import { setAuthToken, setUserData } from "../cookie";
 export const handleRegister = async (formData: any) => {
   try {
     //how data sent from component to backend api
@@ -26,6 +27,8 @@ export const handleLogin = async (formData: any) => {
     const res = await login(formData);
     //component return logic
     if (res.success) {
+      await setAuthToken(res.token);
+      await setUserData(res.data);
       return {
         success: true,
         data: res.data,
