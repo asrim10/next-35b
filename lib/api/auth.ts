@@ -11,7 +11,7 @@ export const register = async (registerData: any) => {
     throw new Error(
       err.response?.data?.message || //backend error message
         err.message || // general axios error message
-        "Registration failed" // fallback message
+        "Registration failed", // fallback message
     );
   }
 };
@@ -25,7 +25,17 @@ export const login = async (loginData: any) => {
     throw new Error(
       err.response?.data?.message || //backend error message
         err.message || // general axios error message
-        "Login failed" // fallback message
+        "Login failed", // fallback message
+    );
+  }
+};
+export const whoami = async () => {
+  try {
+    const response = await axios.get(API.AUTH.WHOAMI);
+    return response.data;
+  } catch (err: Error | any) {
+    throw new Error(
+      err.response.data?.message || err.message || "Failed to fetch user",
     );
   }
 };

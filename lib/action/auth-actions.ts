@@ -1,7 +1,7 @@
 // server side processing
 
 "use client";
-import { login, register } from "../api/auth";
+import { login, register, whoami } from "../api/auth";
 import { setAuthToken, setUserData } from "../cookie";
 export const handleRegister = async (formData: any) => {
   try {
@@ -38,5 +38,17 @@ export const handleLogin = async (formData: any) => {
     return { success: false, message: res.message || "Login Failed" };
   } catch (err: Error | any) {
     return { success: false, message: err.message || "Login Failed" };
+  }
+};
+
+export const handleWhoAmI = async () => {
+  try {
+    const res = await whoami();
+    if (res.success) {
+      return { success: true, data: res.data };
+    }
+    return { success: false, message: res.message || "Failed to fetch user" };
+  } catch (err: Error | any) {
+    return { success: false, message: err.message || "Failed to fetch user" };
   }
 };
