@@ -1,7 +1,7 @@
 // server side processing
 
 "use client";
-import { login, register, whoami } from "../api/auth";
+import { login, register, updateProfile, whoami } from "../api/auth";
 import { setAuthToken, setUserData } from "../cookie";
 export const handleRegister = async (formData: any) => {
   try {
@@ -50,5 +50,23 @@ export const handleWhoAmI = async () => {
     return { success: false, message: res.message || "Failed to fetch user" };
   } catch (err: Error | any) {
     return { success: false, message: err.message || "Failed to fetch user" };
+  }
+};
+
+export const handleUpdateProfile = async (formData: any) => {
+  try {
+    const res = await updateProfile(formData);
+    if (res.success) {
+      return { success: true, data: res.data };
+    }
+    return {
+      success: false,
+      message: res.message || "Failed to update profile",
+    };
+  } catch (err: Error | any) {
+    return {
+      success: false,
+      message: err.message || "Failed to update profile",
+    };
   }
 };

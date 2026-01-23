@@ -1,5 +1,6 @@
 import { handleWhoAmI } from "@/lib/action/auth-actions";
 import { notFound } from "next/navigation";
+import ProfileForm from "./_components/ProfileForm";
 
 export default async function Page() {
   const result = await handleWhoAmI();
@@ -9,5 +10,9 @@ export default async function Page() {
   if (!result.data) {
     notFound();
   }
-  return <div></div>;
+  return (
+    <div>
+      <ProfileForm user={result.data} />
+    </div>
+  );
 }

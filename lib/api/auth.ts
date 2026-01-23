@@ -35,7 +35,23 @@ export const whoami = async () => {
     return response.data;
   } catch (err: Error | any) {
     throw new Error(
-      err.response.data?.message || err.message || "Failed to fetch user",
+      err.response.data?.message || err.message || "Who am I failed",
+    );
+  }
+};
+export const updateProfile = async (profileData: any) => {
+  try {
+    const response = await axios.put(API.AUTH.UPDATEPROFILE, profileData, {
+      headers: {
+        "Content-Type": "multipart/form-data", // for file upload
+      },
+    });
+    return response.data;
+  } catch (err: Error | any) {
+    throw new Error(
+      err.response.data?.message || // backend error message
+        err.message || // general axios error message
+        "Failed to update profile", // fallback message
     );
   }
 };
