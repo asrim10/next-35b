@@ -1,6 +1,7 @@
 // server side processing
 
-"use client";
+"use server";
+import { revalidatePath } from "next/cache";
 import { login, register, updateProfile, whoami } from "../api/auth";
 import { setAuthToken, setUserData } from "../cookie";
 export const handleRegister = async (formData: any) => {
@@ -57,6 +58,8 @@ export const handleUpdateProfile = async (formData: any) => {
   try {
     const res = await updateProfile(formData);
     if (res.success) {
+      await setUserData(res.data); // update cookie data
+      revalidatePath("/user/profile"); // revalidate profile page
       return { success: true, data: res.data };
     }
     return {
