@@ -1,4 +1,7 @@
+"use server";
+
 import { getAllBlogs, deleteBlog } from "@/lib/api/admin/blog";
+import { revalidatePath } from "next/cache";
 
 export const handleGetAllBlogs = async (
   page: number,
@@ -31,6 +34,7 @@ export const handleDeleteBlog = async (id: string) => {
   try {
     const response = await deleteBlog(id);
     if (response.success) {
+      revalidatePath("/admin/blogs");
       return {
         success: true,
         message: response.message,
